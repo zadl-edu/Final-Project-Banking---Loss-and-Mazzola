@@ -19,4 +19,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\Downloads\accounts.dat">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Downloads\tellers.dat">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
