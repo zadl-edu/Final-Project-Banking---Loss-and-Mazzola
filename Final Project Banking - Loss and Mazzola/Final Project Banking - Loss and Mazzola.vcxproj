@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Main.cpp" />
+    <ClCompile Include="Source Files\Teller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Files\accounts.dat">
@@ -138,6 +139,9 @@
       <FileType>Text</FileType>
       <DeploymentContent>true</DeploymentContent>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source Files\Teller.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

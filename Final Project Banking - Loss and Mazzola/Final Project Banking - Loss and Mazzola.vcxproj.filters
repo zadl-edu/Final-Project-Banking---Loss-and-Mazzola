@@ -18,9 +18,17 @@
     <ClCompile Include="Source Files\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\Teller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Files\accounts.dat" />
     <None Include="Data Files\tellers.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source Files\Teller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
