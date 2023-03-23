@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data Files\accounts.dat" />
     <None Include="Data Files\tellers.dat" />
+    <None Include="Data Files\accounts.dat" />
   </ItemGroup>
 </Project>
