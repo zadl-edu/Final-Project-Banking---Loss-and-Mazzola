@@ -1,11 +1,16 @@
 #pragma once
 #include <string>
-namespace Accounts 
+namespace Banking 
 {
 	class Teller
 	{
-		public:Teller (std::string username, std::string password);
-		public:bool LogIn(std::string username, std::string password);
+		private:
+			std::string Username, Password;
+			
+		public:
+			Teller (std::string username, std::string password);
+			bool LogIn(std::string username, std::string password);
+			std::string getUsername();
 	};
 }
 

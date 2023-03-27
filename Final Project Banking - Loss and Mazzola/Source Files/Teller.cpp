@@ -1,16 +1,27 @@
 #include "Teller.h"
 class Teller
 {
-	private:std::string Username, Password;
-
-	public:Teller(std::string username, std::string password)
+private:
+	std::string _username;
+	std::string _password;
+	bool loggedIn = false;
+public:
+	std::string getUsername() { return _username; }
+	
+	Teller(std::string username, std::string password)
 	{
-		Username = username;
-		Password = password;
+		_username = username;
+		_password = password;
 	}
 
-	public:bool LogIn(std::string username, std::string password)
+	bool LogIn(std::string username, std::string password)
 	{
-		return true;
+		if ((_username.compare(username)) == 0 && (_password.compare(password) == 0))
+		{
+			loggedIn = true;
+			return true;
+		}
+		else
+			return false;
 	}
 };
