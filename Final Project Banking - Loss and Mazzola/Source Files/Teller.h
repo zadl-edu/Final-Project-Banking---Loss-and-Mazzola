@@ -11,6 +11,7 @@ namespace Banking
 			Teller (std::string username, std::string password);
 			bool LogIn(std::string username, std::string password);
 			std::string getUsername();
+			bool LogOut();
 	};
 }
 

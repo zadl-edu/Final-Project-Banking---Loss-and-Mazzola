@@ -24,4 +24,9 @@ public:
 		else
 			return false;
 	}
+
+	bool LogOut()
+	{
+		loggedIn = false;
+	}
 };

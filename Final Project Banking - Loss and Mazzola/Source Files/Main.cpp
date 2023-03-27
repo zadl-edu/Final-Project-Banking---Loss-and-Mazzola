@@ -11,15 +11,21 @@ Banking::Teller* loadedTeller;
 
 int main() 
 {	
+	LogInMenu();
 	return 0;
 }
 
-bool Menu(string input)
+int Menu(string input)
 {
-	if (input.compare("Log In") == 0)
+	if (input.compare("Log Out") == 0)
 	{
-		LogInMenu();
-		return true;
+		if (loadedTeller == NULL)
+			if (LogInMenu())
+		return 0;
+	}
+	else if (input.compare("") == 0)
+	{
+		
 	}
 	
 }
@@ -38,9 +44,12 @@ bool LogInMenu()
 		{
 			loadedTeller = &i;
 			cout << "Logged in as " << i.getUsername() << endl;
-			break;
+			return true;
 		}
 	}
+	cout << "Log In Failed\n";
+	return false;
+
 }
 
 void loadInitialData(string tellers, string accounts)
@@ -49,6 +58,10 @@ void loadInitialData(string tellers, string accounts)
 	loadAccounts();
 }
 
-void loadTellers() {}
+void loadTellers() 
+{
+}
 
-void loadAccounts() {}
+void loadAccounts()
+{
+}
