@@ -1,22 +1,23 @@
 #include "Teller.h"
+
+using namespace std;
 class Teller
 {
 private:
-	std::string _username;
-	std::string _password;
+	string _username, _password;
 	bool loggedIn = false;
 public:
-	std::string getUsername() { return _username; }
+	string getUsername() { return _username; }
 	
-	Teller(std::string username, std::string password)
+	Teller(string username, string password)
 	{
 		_username = username;
 		_password = password;
 	}
 
-	bool LogIn(std::string username, std::string password)
+	bool LogIn(string username, string password)
 	{
-		if ((_username.compare(username)) == 0 && (_password.compare(password) == 0))
+		if ((_username == username) && (_password == password))
 		{
 			loggedIn = true;
 			return true;
@@ -28,5 +29,9 @@ public:
 	bool LogOut()
 	{
 		loggedIn = false;
+		if (!loggedIn)
+			return true;
+		else
+			return false;
 	}
 };

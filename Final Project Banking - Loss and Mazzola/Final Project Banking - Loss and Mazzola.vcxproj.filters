@@ -21,6 +21,9 @@
     <ClCompile Include="Source Files\Teller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\Account.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Files\accounts.dat" />
@@ -28,6 +31,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source Files\Teller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Files\Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Files\Account.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

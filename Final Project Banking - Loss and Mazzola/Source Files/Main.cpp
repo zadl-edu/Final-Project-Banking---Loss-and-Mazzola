@@ -2,41 +2,32 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
-#include "Teller.cpp"
-
+#include <thread>
+#include <windows.h>
+#include "Teller.h"
+#include "Account.h"
+#include "Main.h"
 using namespace std;
 
 vector<Banking::Teller> loadedTellerAccounts;
+vector<Banking::Account> loadedAccounts;
 Banking::Teller* loadedTeller;
-
-int main() 
-{	
-	LogInMenu();
-	return 0;
-}
-
-int Menu(string input)
-{
-	if (input.compare("Log Out") == 0)
-	{
-		if (loadedTeller == NULL)
-			if (LogInMenu())
-		return 0;
-	}
-	else if (input.compare("") == 0)
-	{
-		
-	}
-	
-}
 
 bool LogInMenu()
 {
 	string u,p;
 	cout << "Enter Username:";
 	cin >>  u;
+	if (u == "verlassen")
+	{
+		exit(0);
+	}
 	cout << endl << "Enter Password:";
 	cin >> p;
+	if (p == "verlassen")
+	{
+		exit(0);
+	}
 	cout << endl;
 	for (Banking::Teller i : loadedTellerAccounts)
 	{
@@ -49,7 +40,52 @@ bool LogInMenu()
 	}
 	cout << "Log In Failed\n";
 	return false;
+}
 
+void MainMenu()
+{
+	string input;
+	getline(cin, input);
+	if (input == "Log In")
+	{
+		if (!LogInMenu())
+			thread(MainMenu).detach();
+	}
+	else if (input == "Exit")
+	{
+		return;
+	}
+	else 
+	{
+		cout << "Invalid Command : " << input << endl;
+		thread(MainMenu).detach();
+	}
+}
+
+void loadTellers() 
+{
+	string u,p;
+	ifstream inputStream("Data Files\\tellers.dat");
+	while (inputStream >> u)
+	{
+		inputStream >> p;
+		loadedTellerAccounts.push_back(Banking::Teller(u, p));
+	}
+}
+
+void loadAccounts()
+{
+	string accountNumber, ssn, name, address, phoneNumber;
+	ifstream inputStream("Data Files\\accounts.dat");
+	while (getline(inputStream, accountNumber))
+	{
+		getline(inputStream, ssn);
+		getline(inputStream, name);
+		getline(inputStream, address);
+		getline(inputStream, phoneNumber);
+		loadedAccounts.push_back(Banking::Account(accountNumber, ssn, name, address, phoneNumber));
+	}
+		
 }
 
 void loadInitialData(string tellers, string accounts)
@@ -58,10 +94,9 @@ void loadInitialData(string tellers, string accounts)
 	loadAccounts();
 }
 
-void loadTellers() 
+int main()
 {
-}
-
-void loadAccounts()
-{
+	loadInitialData("Data Files\\tellers.dat", "Data Files\\accounts.dat");
+	MainMenu();
+	return 0;
 }
