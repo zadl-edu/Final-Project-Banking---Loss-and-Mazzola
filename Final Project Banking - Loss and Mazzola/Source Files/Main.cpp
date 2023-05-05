@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <thread>
+#include <sstream>
 #include "Teller.h"
 #include "Account.h"
 #include "Main.h"
@@ -115,6 +116,8 @@ void CreateNewAccountMenu()
 	string accountNumber, ssn, name, address, phoneNumber;
 	cout << "Enter the account number :\n";
 	getline(cin, accountNumber);
+	if (accountNumber == "verlassen")
+		startExit();
 	for (Banking::Account i : loadedAccounts)
 	{
 		if (i.getAcountNumber() == accountNumber)
@@ -125,12 +128,20 @@ void CreateNewAccountMenu()
 	}
 	cout << "Enter the SSN :\n";
 	getline(cin, ssn);
+	if (ssn == "verlassen")
+		startExit();
 	cout << "Enter the name :\n";
 	getline(cin, name);
+	if (name == "verlassen")
+		startExit();
 	cout << "Enter the address :\n";
 	getline(cin, address);
+	if (address == "verlassen")
+		startExit();
 	cout << "Enter the phone number\n";
 	getline(cin, phoneNumber);
+	if (phoneNumber == "verlassen")
+		startExit();
 	loadedAccounts.push_back(Banking::Account(accountNumber, ssn, name, address, phoneNumber));
 	cout << "Account Created.\n";
 }
@@ -201,6 +212,8 @@ void DeleteAccountMenu()
 	string input;
 	cout << "Input the account number of the desired account to delete:";
 	getline(cin, input);
+	if (input == "verlassen")
+		startExit();
 	for (int i = 0; i < loadedAccounts.size(); i++)
 	{
 		if (loadedAccounts[i].getAcountNumber() == input)
@@ -223,6 +236,8 @@ void SelectAccountMenu()
 	string input;
 	cout << "Enter the account number :\n";
 	cin >> input;
+	if (input == "verlassen")
+		startExit();
 	for (Banking::Account i : loadedAccounts)
 	{
 		if (i.getAcountNumber() == input)
@@ -292,6 +307,8 @@ void AccountMenu()
 		cout << "Current name on the account is " << selectedAccount->getName() << ".\n";
 		cout << "Enter the new name of the account :";
 		getline(cin, input);
+		if (input == "verlassen")
+			startExit();
 		selectedAccount->setName(input);
 		cout << "Current name on the account is now" << selectedAccount->getName() << ".\n";
 		ManageMenu();
@@ -301,6 +318,8 @@ void AccountMenu()
 		cout << "Current phone number on the account is " << selectedAccount->getPhone() << ".\n";
 		cout << "Enter the new phone number of the account :";
 		getline(cin, input);
+		if (input == "verlassen")
+			startExit();
 		selectedAccount->setPhone(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getPhone() << ".\n";
 		ManageMenu();
@@ -310,6 +329,8 @@ void AccountMenu()
 		cout << "Current SSN on the account is " << selectedAccount->getSSN() << ".\n";
 		cout << "Enter the new SNN of the account :";
 		getline(cin, input);
+		if (input == "verlassen")
+			startExit();
 		selectedAccount->setSSN(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getSSN() << ".\n";
 		ManageMenu();
@@ -319,6 +340,8 @@ void AccountMenu()
 		cout << "Current address on the account is " << selectedAccount->getAddress() << ".\n";
 		cout << "Enter the new address of the account :";
 		getline(cin, input);
+		if (input == "verlassen")
+			startExit();
 		selectedAccount->setAddress(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getAddress() << ".\n";
 		ManageMenu();
@@ -327,7 +350,12 @@ void AccountMenu()
 	{
 		float value;
 		cout << "Enter value of deposit in USD :";
-		cin >> value;
+		cin >> input;
+		if (input == "verlassen")
+			startExit();
+		stringstream ss;
+		ss << input;
+		ss >> value;
 		if (value != NULL)
 		{
 			cout << "Deposited " << value << " USD.\nNew Balance is " << (float)(selectedAccount->deposit((int64_t)((value * 100) / 100.0f))) << " USD.\n";
@@ -341,11 +369,17 @@ void AccountMenu()
 	else if (input == "Withdraw")
 	{
 		float value;
+		cin >> input;
+		if (input == "verlassen")
+			startExit();
+		stringstream ss;
+		ss << input;
+		ss >> value;
 		cout << "Enter value of withdraw in USD :";
 		cin >> value;
 		if (value != NULL)
 		{
-			cout << "Deposited " << value << " cents.\nNew Balance is " << (float)(selectedAccount->withdraw((int64_t)(value * 100.0f)) / 100) << " cents.\n";
+			cout << "Deposited " << value << " cents.\nNew Balance is " << (float)(selectedAccount->withdraw((int64_t)(value * 100)) / 100.0f) << " cents.\n";
 		}
 		else
 		{
@@ -355,10 +389,15 @@ void AccountMenu()
 	}
 	else if (input == "Set Balance")
 	{
-		cout << "Current balance is " << (float)(selectedAccount->getBalance()/100) << " USD.\n";
+		cout << "Current balance is " << (float)(selectedAccount->getBalance()/100.0f) << " USD.\n";
 		float value;
 		cout << "Enter new value of account in USD :";
-		cin >> value;
+		cin >> input;
+		if (input == "verlassen")
+			startExit();
+		stringstream ss;
+		ss << input;
+		ss >> value;
 		if (value != NULL)
 		{
 			selectedAccount->setBalance((int64_t)(value * 100));
