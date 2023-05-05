@@ -1,37 +1,39 @@
 #include "Teller.h"
+#include <fstream>
 
 using namespace std;
-class Teller
+
+string Banking::Teller::getUsername() 
 {
-private:
-	string _username, _password;
-	bool loggedIn = false;
-public:
-	string getUsername() { return _username; }
+	return _username; 
+}
 	
-	Teller(string username, string password)
-	{
-		_username = username;
-		_password = password;
-	}
+Banking::Teller::Teller(string username, string password)
+{
+	_username = username;
+	_password = password;
+}
 
-	bool LogIn(string username, string password)
+bool Banking::Teller::LogIn(string username, string password)
+{
+	if ((_username == username) && (_password == password))
 	{
-		if ((_username == username) && (_password == password))
-		{
-			loggedIn = true;
-			return true;
-		}
-		else
-			return false;
+		loggedIn = true;
+		return true;
 	}
+	else
+		return false;
+}
 
-	bool LogOut()
-	{
-		loggedIn = false;
-		if (!loggedIn)
-			return true;
-		else
-			return false;
-	}
-};
+bool Banking::Teller::LogOut()
+{
+	loggedIn = false;
+	if (!loggedIn)
+		return true;
+	else
+		return false;
+}
+void Banking::Teller::saveToFile(std::ofstream& fileStream)
+{
+	fileStream << _username << " " << _password << endl;
+}

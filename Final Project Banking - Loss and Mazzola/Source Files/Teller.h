@@ -12,6 +12,11 @@ namespace Banking
 			bool LogIn(std::string username, std::string password);
 			std::string getUsername();
 			bool LogOut();
+			bool checkLoggedIn()
+			{
+				return loggedIn;
+			}
+			void saveToFile(std::ofstream& fileStream);
 	};
 }
 
