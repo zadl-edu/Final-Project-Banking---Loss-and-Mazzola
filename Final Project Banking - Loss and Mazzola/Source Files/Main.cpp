@@ -179,7 +179,6 @@ void ManageMenu()
 	{
 		SelectAccountMenu();
 		AccountMenu();
-		ManageMenu();
 	}
 	else if (input == "List Accounts")
 	{
@@ -201,7 +200,7 @@ void ManageMenu()
 	else
 	{
 		cout << "Invalid Command : " << input << endl;
-		LoggedInMenu();
+		ManageMenu();
 	}
 }
 
@@ -285,22 +284,22 @@ void AccountMenu()
 	else if (input == "Get Name")
 	{
 		cout << "Current name on the account is " << selectedAccount->getName() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Get Phone Number")
 	{
 		cout << "Current phone number on the account is " << selectedAccount->getPhone() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Get SSN")
 	{
 		cout << "Current SSN on the account is " << selectedAccount->getSSN() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Get Address")
 	{
 		cout << "Current Address on the account is " << selectedAccount->getAddress() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Change Name")
 	{
@@ -311,7 +310,7 @@ void AccountMenu()
 			startExit();
 		selectedAccount->setName(input);
 		cout << "Current name on the account is now" << selectedAccount->getName() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Change Phone Number")
 	{
@@ -322,7 +321,7 @@ void AccountMenu()
 			startExit();
 		selectedAccount->setPhone(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getPhone() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Change SSN")
 	{
@@ -333,7 +332,7 @@ void AccountMenu()
 			startExit();
 		selectedAccount->setSSN(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getSSN() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Change Address")
 	{
@@ -344,7 +343,7 @@ void AccountMenu()
 			startExit();
 		selectedAccount->setAddress(input);
 		cout << "Current phone number on the account is now" << selectedAccount->getAddress() << ".\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Deposit")
 	{
@@ -364,7 +363,7 @@ void AccountMenu()
 		{
 			cout << "Invalid input.\n";
 		}
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Withdraw")
 	{
@@ -385,7 +384,7 @@ void AccountMenu()
 		{
 			cout << "Invalid input.\n";
 		}
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Set Balance")
 	{
@@ -407,17 +406,17 @@ void AccountMenu()
 		{
 			cout << "Invalid input.\n";
 		}
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Get Balance")
 	{
 		cout << "Current balance is " << (float)(selectedAccount->getBalance()/ 100.0f) << " USD.\n";
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "List Accounts")
 	{
 		ListAccounts();
-		ManageMenu();
+		AccountMenu();
 	}
 	else if (input == "Back")
 	{
@@ -435,7 +434,7 @@ void AccountMenu()
 	else
 	{
 		cout << "Invalid Command : " << input << endl;
-		LoggedInMenu();
+		AccountMenu();
 	}
 
 }
@@ -443,7 +442,7 @@ void AccountMenu()
 void loadTellers(string tellers)
 {
 	string u,p;
-	ifstream inputStream("Data Files\\tellers.dat");
+	ifstream inputStream(tellers);
 	if (inputStream.is_open())
 	{
 		while (inputStream >> u)
